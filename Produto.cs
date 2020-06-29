@@ -18,9 +18,16 @@ namespace Aula27_28_29_30
 
         public Produto()
         {
+            string pasta = PATH.Split('/')[0];
+
+             if (!Directory.Exists(pasta))
+            {
+               Directory.CreateDirectory(pasta);
+              
+            }
             if(!File.Exists(PATH))
             {
-                File.Create(PATH);//.Close()\\ 
+                File.Create(PATH).Close();
             }
         }
 
