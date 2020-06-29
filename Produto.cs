@@ -7,13 +7,6 @@ namespace Aula27_28_29_30
         public string Nome { get; set; }
         public float Preco { get; set; }
 
-        public Produto(int codigo_ , string nome_ , float preco_ )
-        {
-            this.Codigo = codigo_;
-            this.Nome = nome_;
-            this.Preco = preco_;
-        }
-
         private const string PATH = "Database/Produto.csv";
 
         public Produto()
