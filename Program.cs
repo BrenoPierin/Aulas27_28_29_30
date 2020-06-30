@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Aula27_28_29_30
 {
@@ -12,8 +13,17 @@ namespace Aula27_28_29_30
            p1.Preco = 19.99f;
 
            p1.Inserir(p1);
+
+           List<Produto> lista = p1.Ler();
+
+           foreach(Produto p in lista)
+           {
+               System.Console.WriteLine($"R${p.Preco} - {p.Nome} - {p.Codigo}");
+           }
            
 
         }
+
+
     }
 }

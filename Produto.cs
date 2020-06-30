@@ -33,9 +33,30 @@ namespace Aula27_28_29_30
 
         public List<Produto> Ler()
         {
+            //lista criada
             List<Produto> produtos = new List<Produto>();
 
-            
+            string[] linhas = File.ReadAllLines(PATH);
+
+            foreach( var linha in linhas )
+            {
+                string[] dados = linha.Split(';');
+
+                Produto p = new Produto();
+                p.Codigo  = int.Parse(SepararDado(dados[0]));
+                p.Nome  = SepararDado(dados[1]);
+                p.Preco  = float.Parse(SepararDado(dados[2]));
+
+                produtos.Add(p);
+            }
+
+            return produtos;
+
+        }
+
+        public string SepararDado(string dados)
+        {
+            return dados.Split('=')[1];
         }
 
         private string PrepararLinhaCSV(Produto prod)
