@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 namespace Aula27_28_29_30
 {
@@ -28,6 +29,13 @@ namespace Aula27_28_29_30
         {
             var linha = new string[] {p.PrepararLinhaCSV(p)};
             File.AppendAllLines(PATH, linha);
+        }
+
+        public List<Produto> Ler()
+        {
+            List<Produto> produtos = new List<Produto>();
+
+            
         }
 
         private string PrepararLinhaCSV(Produto prod)
