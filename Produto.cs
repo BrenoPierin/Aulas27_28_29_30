@@ -16,18 +16,39 @@ namespace Aula27_28_29_30
         public Produto()
         {
 
-            // Solução do desafio e criar os arquivos se n existir
-                if(!File.Exists(PATH))
-                {
-                Directory.CreateDirectory("Database");
+            // Solução do desafio
+            string pasta = PATH.Split('/')[0];
+            if(!Directory.Exists(pasta))
+            {
+                Directory.CreateDirectory(pasta);
+            }
+
+            // Cria o arquivo caso não exista
+            if(!File.Exists(PATH))
+            {
                 File.Create(PATH).Close();
-                }
+            }
         }
 
         public void Inserir(Produto prod)
         {
-            var linha = new string[] { PrepararLinha(prod) };
+            string[] linha = new string[] { PrepararLinha(prod) };
             File.AppendAllLines(PATH, linha);
+        }
+
+        /// <summary>
+        /// metodo que separa os termos do "="
+        /// </summary>
+        /// <param name="dados">separa os dados do csv</param>
+        /// <returns>somente os valores da coluna</returns>
+
+        public string Separar(string dados)
+        {
+            //Separei os dados em dois
+            //Antes: código = {p.Codigo};
+            //Agora: código[0] | {p.Codigo}[1];
+            return dados.Split("=")[1];
+
         }
 
         /// <summary>
@@ -46,7 +67,7 @@ namespace Aula27_28_29_30
             foreach( var linha in linhas )
             {
                 //Separei os termos entre os ';'
-                string[] dado = linha.Split(';');
+                string[] dado = linha.Split(";");
 
                 // dado[0] = codigo=1
                 // dado[1] = nome=Gibson
@@ -98,23 +119,9 @@ namespace Aula27_28_29_30
             }
         }
 
-        /// <summary>
-        /// metodo que separa os termos do "="
-        /// </summary>
-        /// <param name="dados">separa os dados do csv</param>
-        /// <returns>somente os valores da coluna</returns>
-        public string Separar(string dados){
-            //Separei os dados em dois
-            //Antes: código = {p.Codigo};
-            //Agora: código[0] | {p.Codigo}[1];
-            return dados.Split('=')[1];
-
-        }
-
-
         private string PrepararLinha(Produto p)
         {
-            return $"\ncodigo={Codigo};nome={Nome};preco={Preco}";
+            return $"codigo={Codigo};nome={Nome};preco={Preco}";
         }
     }
 }
