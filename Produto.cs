@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -61,37 +62,44 @@ namespace Aula27_28_29_30
                 //Adicionei o produto na lista;
                 produtos.Add(p);
             }
-            foreach(var linha in linhas)
-            {
-                string[] dados = linha.Split(';');
-                
-                Produto produt = new Produto();
-                var y = produt.Nome.OrderBy(c => produt.Nome );
 
-                System.Console.WriteLine(y);
-                
-            }
+            produtos = produtos.OrderBy(z=> z.Nome).ToList();
             //Retornei o produto;
             return produtos;
         }
 
-        // public void Listar()
-        // {
-        //     string[] prod = File.ReadAllLines(PATH);
 
-        //     foreach(var p in prod)
-        //     {
-        //         string[] dados = p.Split(';');
-                
-        //         Produto produt = new Produto();
-        //         var y = produt.Ler().OrderBy(c => c.Nome );
+        //filtro de produstos (desafio da aula)
+        public List<Produto> Filtrar(string _nome)
+        {
+            return Ler().FindAll(x => x.Nome == _nome);
+        }
 
-        //         foreach(Produto pro in y)
-        //         {
-        //         System.Console.WriteLine(y);
-        //         }
-        //     }
-        // }
+        public void Remover(string _termo)
+        {
+            // Criamos uma lista de linhas para fazer um "backup"
+            //na memoria do sistema
+            List<string> linhas = new List<string>();
+
+
+            using(StreamReader arquivo = new StreamReader(PATH))
+            {
+                string linha;
+                while((linha = arquivo.ReadLine()) != null)
+                {
+                    linhas.Add(linha);
+                }
+                linhas.RemoveAll(z => z.Contains(_termo));
+            }
+
+            //criamos uma forma de reescrever o arquivo sem as linhas rmovidas
+            using(StreamWriter output = new StreamWriter(PATH))
+            {
+                output.Write(String.Join(Environment.NewLine, linhas.ToArray()));
+            }
+        }
+
+
 
         /// <summary>
         /// metodo que separa os termos do "="

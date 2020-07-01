@@ -15,6 +15,11 @@ namespace Aula27_28_29_30
            p1.Inserir(p1);
 
            List<Produto> lista = p1.Ler();
+           
+        //    List<Produto> list = p1.Filtrar("estojo");
+
+        p1.Remover("estojo");
+           
 
            foreach(Produto p in lista)
            {
