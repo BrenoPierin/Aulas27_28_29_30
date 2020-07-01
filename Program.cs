@@ -9,21 +9,18 @@ namespace Aula27_28_29_30
         {
            Produto p1 = new Produto();
            p1.Codigo = 1;
-           p1.Nome = "esojo";
-           p1.Preco = 19.99f;
+           p1.Nome = "Pc Gamer";
+           p1.Preco = 1500.99f;
 
            p1.Inserir(p1);
+           p1.Remover("Audi");
 
            List<Produto> lista = p1.Ler();
-           
-        //    List<Produto> list = p1.Filtrar("estojo");
 
-        p1.Remover("estojo");
-           
-
-           foreach(Produto p in lista)
+       
+           foreach(Produto item in lista)
            {
-               System.Console.WriteLine($"R${p.Preco} - {p.Nome} - {p.Codigo}");
+               System.Console.WriteLine($"R${item.Preco} - {item.Nome}");
            }
            
 

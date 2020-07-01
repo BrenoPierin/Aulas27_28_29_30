@@ -15,22 +15,18 @@ namespace Aula27_28_29_30
 
         public Produto()
         {
-            string pasta = PATH.Split('/')[0];
 
-             if (!Directory.Exists(pasta))
-            {
-               Directory.CreateDirectory(pasta);
-              
-            }
-            if(!File.Exists(PATH))
-            {
+            // Solução do desafio e criar os arquivos se n existir
+                if(!File.Exists(PATH))
+                {
+                Directory.CreateDirectory("Database");
                 File.Create(PATH).Close();
-            }
+                }
         }
 
-        public void Inserir(Produto p)
+        public void Inserir(Produto prod)
         {
-            var linha = new string[] {p.PrepararLinhaCSV(p)};
+            var linha = new string[] { PrepararLinha(prod) };
             File.AppendAllLines(PATH, linha);
         }
 
@@ -41,7 +37,7 @@ namespace Aula27_28_29_30
         public List<Produto> Ler()
         {
             //lista criada
-            List<Produto> produtos = new List<Produto>();
+            List<Produto> prod = new List<Produto>();
 
             //Transformar as linhas em um array de string;
             string[] linhas = File.ReadAllLines(PATH);
@@ -50,22 +46,25 @@ namespace Aula27_28_29_30
             foreach( var linha in linhas )
             {
                 //Separei os termos entre os ';'
-                string[] dados = linha.Split(';');
+                string[] dado = linha.Split(';');
 
+                // dado[0] = codigo=1
+                // dado[1] = nome=Gibson
+                // dado[2] = preco=5500
 
                 //declarando um novo tipo de "produto" e tratando os resultados;
-                Produto p = new Produto();
-                p.Codigo  = int.Parse(SepararDado(dados[0]));
-                p.Nome  = SepararDado(dados[1]);
-                p.Preco  = float.Parse(SepararDado(dados[2]));
+                Produto p   = new Produto(); 
+                p.Codigo    = Int32.Parse( Separar(dado[0]) );
+                p.Nome      = Separar(dado[1]);
+                p.Preco     = float.Parse( Separar(dado[2]) );
 
                 //Adicionei o produto na lista;
-                produtos.Add(p);
+                prod.Add(p);
             }
 
-            produtos = produtos.OrderBy(z=> z.Nome).ToList();
+            prod = prod.OrderBy( z => z.Nome ).ToList();
             //Retornei o produto;
-            return produtos;
+            return prod;
         }
 
 
@@ -77,7 +76,7 @@ namespace Aula27_28_29_30
 
         public void Remover(string _termo)
         {
-            // Criamos uma lista de linhas para fazer um "backup"
+            //Criamos uma lista de linhas para fazer um "backup"
             //na memoria do sistema
             List<string> linhas = new List<string>();
 
@@ -95,26 +94,27 @@ namespace Aula27_28_29_30
             //criamos uma forma de reescrever o arquivo sem as linhas rmovidas
             using(StreamWriter output = new StreamWriter(PATH))
             {
-                output.Write(String.Join(Environment.NewLine, linhas.ToArray()));
+                output.Write(String.Join(Environment.NewLine, linhas.ToArray())); 
             }
         }
-
-
 
         /// <summary>
         /// metodo que separa os termos do "="
         /// </summary>
         /// <param name="dados">separa os dados do csv</param>
         /// <returns>somente os valores da coluna</returns>
-        public string SepararDado(string dados)
-        {
+        public string Separar(string dados){
+            //Separei os dados em dois
+            //Antes: código = {p.Codigo};
+            //Agora: código[0] | {p.Codigo}[1];
             return dados.Split('=')[1];
+
         }
 
 
-        private string PrepararLinhaCSV(Produto prod)
+        private string PrepararLinha(Produto p)
         {
-            return $"codigo={Codigo};Nome={Nome};Preço={Preco}";
+            return $"\ncodigo={Codigo};nome={Nome};preco={Preco}";
         }
     }
 }
