@@ -7,26 +7,34 @@ namespace Aula27_28_29_30
     {
         static void Main(string[] args)
         {
-           Produto p1 = new Produto();
-           p1.Codigo = 1;
-           p1.Nome = "Pc Gamer";
-           p1.Preco = 1500.99f;
+            
+            Produto prod = new Produto();
+            prod.Codigo = 2;
+            prod.Nome = "Xbox one";
+            prod.Preco = 1900f;
 
-           p1.Inserir(p1);
-           p1.Remover("Pc Gamer");
-           p1.Filtrar("Mouse Gamer");
+            prod.Cadastrar(prod);
 
-           List<Produto> lista = p1.Ler();
+            prod.Remover("2");
 
-       
-           foreach(Produto item in lista)
-           {
-               System.Console.WriteLine($"R${item.Preco} - {item.Nome}");
-           }
-           
+            Produto alterado = new Produto();
+            alterado.Codigo = 2;
+            alterado.Nome = "Xbox 360";
+            alterado.Preco = 600f;
+
+            prod.Alterar(alterado);
+
+
+            List<Produto> lista = prod.Ler();
+
+            foreach (Produto item in lista)
+            {
+                Console.WriteLine($"R${item.Preco} - {item.Nome}");
+            }
+
+
+
 
         }
-
-
     }
 }

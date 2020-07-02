@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Breno USA\\Senai\\Aula27_28_29_30\\Aula27_28_29_30.csproj",
+      "projectUniqueName": "C:\\Users\\Masseria\\Desktop\\Breno\\ExercicioCSV\\Aula27_28_29_30.csproj",
       "projectName": "Aula27_28_29_30",
-      "projectPath": "C:\\Breno USA\\Senai\\Aula27_28_29_30\\Aula27_28_29_30.csproj",
+      "projectPath": "C:\\Users\\Masseria\\Desktop\\Breno\\ExercicioCSV\\Aula27_28_29_30.csproj",
       "packagesPath": "C:\\Users\\Masseria\\.nuget\\packages\\",
-      "outputPath": "C:\\Breno USA\\Senai\\Aula27_28_29_30\\obj\\",
+      "outputPath": "C:\\Users\\Masseria\\Desktop\\Breno\\ExercicioCSV\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Masseria\\AppData\\Roaming\\NuGet\\NuGet.Config"
